@@ -12,7 +12,7 @@ def send
   config.set(:mq_vhost, '/')
   Hutch.connect({}, config)
   command_output_each_line(ARGV.join(" "), {}) do |line|
-    Hutch.publish('some.key', JSON.parse(line))
+    Hutch.publish('bot.record', JSON.parse(line))
   end
 end
 
