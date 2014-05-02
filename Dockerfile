@@ -10,6 +10,7 @@ RUN echo 'source /usr/local/rvm/scripts/rvm' >> /etc/bash.bashrc
 RUN /bin/bash -l -c 'rvm install ruby-1.9.2-p320'
 
 ADD Gemfile /etc/Gemfile
+ADD angler-wrapper.rb /usr/bin/angler-wrapper.rb
 RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 
 # Special handling for scraperwiki gem because rubygems doesn't support
