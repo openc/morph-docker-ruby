@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 # Gems we want in addition to those provided by morph:
 gem "hutch"
+gem "json-schema"
+gem "backports"
 
 # gems used in openaustralia/morph-ruby:
 
