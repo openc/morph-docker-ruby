@@ -10,10 +10,11 @@ RUN echo 'source /usr/local/rvm/scripts/rvm' >> /etc/bash.bashrc
 
 RUN /bin/bash -l -c 'rvm install ruby-1.9.3-p545'
 
-ADD angler-wrapper.rb /usr/bin/angler-wrapper.rb
-
 ADD Gemfile /etc/Gemfile
 RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
+
+# Volume for sharing wrapper script
+VOLUME /utils
 
 # Special handling for scraperwiki gem because rubygems doesn't support
 # gems from git repositories. So we have to explicitly install it.
