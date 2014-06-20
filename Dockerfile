@@ -23,7 +23,7 @@ RUN git clone https://github.com/openaustralia/scraperwiki-ruby.git /build
 RUN cd /build; git checkout morph_defaults
 # rake install is not working so doing it in two steps
 # TODO Figure out what is going on here
-RUN /bin/bash -l -c 'cd /build; rake build'
+RUN /bin/bash -l -c 'cd /build; rake --trace build'
 RUN /bin/bash -l -c 'cd /build; gem install /build/pkg/scraperwiki-3.0.1.gem'
 RUN rm -rf /build
 
@@ -31,11 +31,11 @@ RUN rm -rf /build
 # gems from git repositories. So we have to explicitly install it.
 RUN mkdir /build
 RUN git clone https://github.com/openc/openc_bot.git /build
-RUN cd /build; git checkout enumerators-and-iterators
+RUN cd /build;  git pull; git checkout master
 # rake install is not working so doing it in two steps
 # TODO Figure out what is going on here
-RUN /bin/bash -l -c 'cd /build; rake build'
-RUN /bin/bash -l -c 'cd /build; gem install /build/pkg/openc_bot-0.0.6.gem'
+RUN /bin/bash -l -c 'cd /build; rake --trace build'
+RUN /bin/bash -l -c 'cd /build; gem install /build/pkg/openc_bot-0.0.12.gem'
 RUN rm -rf /build
 
 # Add prerun script which will disable output buffering
