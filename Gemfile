@@ -1,3 +1,3 @@
 source 'https://rubygems.org'
 
-gem "turbot-ruby-gems", ">= 0.7"
+gem "turbot-ruby-gems", ">= 0.8"
