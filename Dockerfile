@@ -11,6 +11,7 @@ RUN echo 'source /usr/local/rvm/scripts/rvm' >> /etc/bash.bashrc
 RUN /bin/bash -l -c 'rvm install ruby-1.9.3-p545'
 
 ADD Gemfile /etc/Gemfile
+RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 
 # Volume for sharing wrapper script
 VOLUME /utils
@@ -39,5 +40,3 @@ RUN rm -rf /build
 
 # Add prerun script which will disable output buffering
 ADD prerun.rb /usr/local/lib/prerun.rb
-
-RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
