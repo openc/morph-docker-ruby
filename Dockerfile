@@ -1,6 +1,12 @@
 FROM openaustralia/morph-base
 MAINTAINER Seb Bacon <seb@opencorporates.com>
 
+# Set the locale
+RUN locale-gen en_GB.UTF-8
+ENV LANG en_GB.UTF-8
+ENV LANGUAGE en_GB:en
+ENV LC_ALL en_GB.UTF-8
+
 # libcurl is needed by typhoeus gem
 RUN apt-get update
 RUN apt-get -y install curl libxslt-dev libxml2-dev libcurl4-gnutls-dev poppler-utils
