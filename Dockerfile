@@ -18,6 +18,9 @@ RUN /bin/bash -l -c 'rvm install ruby-1.9.3-p545'
 
 ADD Gemfile /etc/Gemfile
 RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
+# For some reason bundle install doesn't install everything, so we need to do it twice
+RUN /bin/bash -l -c 'rm /etc/Gemfile.lock'
+RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 
 # Volume for sharing wrapper script
 VOLUME /utils
