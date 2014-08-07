@@ -39,3 +39,5 @@ RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 # For some reason bundle install doesn't install everything, so we need to do it twice
 RUN /bin/bash -l -c 'rm /etc/Gemfile.lock'
 RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
+
+VOLUME /output
