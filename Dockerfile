@@ -11,6 +11,7 @@ ENV LC_ALL en_GB.UTF-8
 RUN apt-get update
 RUN apt-get -y install curl libxslt-dev libxml2-dev libcurl4-gnutls-dev poppler-utils
 
+RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
 RUN curl -sSL https://get.rvm.io | bash -s stable
 RUN echo 'source /usr/local/rvm/scripts/rvm' >> /etc/bash.bashrc
 
