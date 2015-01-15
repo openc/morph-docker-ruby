@@ -35,15 +35,17 @@ RUN rm -rf /build
 # Add prerun script which will disable output buffering
 ADD prerun.rb /usr/local/lib/prerun.rb
 
+# Install apache tika
+# Required for tika
+RUN apt-get update
+RUN apt-get -y install openjdk-7-jre-headless
+RUN /bin/bash -l -c 'cd /tmp && curl http://mirror.ox.ac.uk/sites/rsync.apache.org/tika/tika-app-1.6.jar > /usr/local/tika-app-1.6.jar'
+
 ADD Gemfile /etc/Gemfile
 RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 # For some reason bundle install doesn't install everything, so we need to do it twice
 RUN /bin/bash -l -c 'rm /etc/Gemfile.lock'
 RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 
-# Install apache tika
-# Required for tika
-RUN apt-get -y install openjdk-7-jre-headless
-RUN /bin/bash -l -c 'cd /tmp && curl http://mirror.ox.ac.uk/sites/rsync.apache.org/tika/tika-app-1.6.jar > /usr/local/tika-app-1.6.jar'
 
 VOLUME /output
