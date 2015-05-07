@@ -12,7 +12,7 @@ RUN apt-get update
 RUN apt-get -y install curl libxslt-dev libxml2-dev libcurl4-gnutls-dev poppler-utils
 
 # This installs various executables that are useful for scraping
-RUN apt-get -y install --no-install-recommends gnumeric gocr libjpeg-progs
+RUN apt-get -y install --no-install-recommends gnumeric gocr libjpeg-progs libreoffice
 
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
 RUN curl -sSL https://get.rvm.io | bash -s stable
