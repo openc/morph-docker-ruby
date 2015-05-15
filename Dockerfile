@@ -12,13 +12,14 @@ RUN apt-get update
 RUN apt-get -y install curl libxslt-dev libxml2-dev libcurl4-gnutls-dev poppler-utils
 
 # This installs various executables that are useful for scraping
-RUN apt-get -y install --no-install-recommends gnumeric gocr libjpeg-progs libreoffice
+RUN apt-get -y install --no-install-recommends gnumeric gocr libjpeg-progs libreoffice-base libreoffice-common unoconv
 
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
 RUN curl -sSL https://get.rvm.io | bash -s stable
 RUN echo 'source /usr/local/rvm/scripts/rvm' >> /etc/bash.bashrc
 
 RUN /bin/bash -l -c 'rvm install ruby-1.9.3-p545'
+RUN /bin/bash -l -c 'gem install bundler'
 
 
 # Volume for sharing wrapper script
