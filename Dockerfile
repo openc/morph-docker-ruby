@@ -53,3 +53,7 @@ RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 
 
 VOLUME /output
+
+# Install the most recent version of libreoffice
+RUN apt-get -y install --no-install-recommends libgl1-mesa-dri libglu1-mesa
+RUN mkdir /build && cd /build && curl -O http://www.mirrorservice.org/sites/download.documentfoundation.org/tdf/libreoffice/stable/4.4.3/deb/x86_64/LibreOffice_4.4.3_Linux_x86-64_deb.tar.gz && tar xzf LibreOffice_4.4.3_Linux_x86-64_deb.tar.gz && cd LibreOffice_4.4.3.2_Linux_x86-64_deb/DEBS && dpkg -i *.deb
