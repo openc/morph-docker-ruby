@@ -57,3 +57,5 @@ RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 
 
 VOLUME /output
+
+ENV HOME=/home/scraper
