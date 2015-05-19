@@ -17,6 +17,7 @@ RUN apt-get -y install --no-install-recommends gnumeric gocr libjpeg-progs
 # Install the most recent version of libreoffice
 RUN apt-get -y install --no-install-recommends libgl1-mesa-dri libglu1-mesa
 RUN mkdir /build && cd /build && curl -O http://www.mirrorservice.org/sites/download.documentfoundation.org/tdf/libreoffice/stable/4.4.3/deb/x86_64/LibreOffice_4.4.3_Linux_x86-64_deb.tar.gz && tar xzf LibreOffice_4.4.3_Linux_x86-64_deb.tar.gz && cd LibreOffice_4.4.3.2_Linux_x86-64_deb/DEBS && dpkg -i *.deb
+RUN rm -rf /build
 
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
 RUN curl -sSL https://get.rvm.io | bash -s stable
