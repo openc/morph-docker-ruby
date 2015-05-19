@@ -60,3 +60,4 @@ RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 VOLUME /output
 
 ENV HOME=/home/scraper
+RUN /bin/bash -l -c 'ln -s /usr/local/bin/libreoffice4.4 /usr/local/bin/libreoffice'
