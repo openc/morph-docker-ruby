@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-gem "turbot-ruby-gems", ">= 0.26"
+gem "turbot-ruby-gems", ">= 0.27"
 gem "turbot-runner", ">= 0.2.2"
