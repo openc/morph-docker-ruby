@@ -20,6 +20,11 @@ RUN mkdir /build && cd /build && curl -O http://www.mirrorservice.org/sites/down
 RUN rm -rf /build
 RUN /bin/bash -l -c 'ln -s /usr/local/bin/libreoffice5.0 /usr/local/bin/libreoffice'
 
+# PDFBox
+RUN /bin/bash -l -c 'cd /tmp && curl http://mirrors.ukfast.co.uk/sites/ftp.apache.org/pdfbox/2.0.0-RC1/pdfbox-app-2.0.0-RC1.jar > /usr/local/lib/pdfbox-app-2.0.0-RC1.jar'
+RUN /bin/bash -l -c 'ln -s /usr/local/lib/pdfbox-app-2.0.0-RC1.jar /usr/local/lib/pdfbox-app.jar'
+
+
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
 RUN curl -sSL https://get.rvm.io | bash -s stable
 RUN echo 'source /usr/local/rvm/scripts/rvm' >> /etc/bash.bashrc
@@ -50,6 +55,7 @@ ADD prerun.rb /usr/local/lib/prerun.rb
 RUN apt-get update
 RUN apt-get -y install openjdk-7-jre-headless
 RUN /bin/bash -l -c 'cd /tmp && curl http://mirror.ox.ac.uk/sites/rsync.apache.org/tika/tika-app-1.7.jar > /usr/local/tika-app-1.7.jar'
+
 
 ADD Gemfile /etc/Gemfile
 RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
