@@ -56,7 +56,6 @@ RUN apt-get update
 RUN apt-get -y install openjdk-7-jre-headless
 RUN /bin/bash -l -c 'cd /tmp && curl http://mirror.ox.ac.uk/sites/rsync.apache.org/tika/tika-app-1.7.jar > /usr/local/tika-app-1.7.jar'
 
-
 ADD Gemfile /etc/Gemfile
 RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 # For some reason bundle install doesn't install everything, so we need to do it twice
@@ -65,5 +64,7 @@ RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 
 
 VOLUME /output
+RUN addgroup --gid 3000 openc
+RUN adduser --home /data --disabled-login --gecos "Openc User" --uid 3000 --gid 3000 openc
 
-ENV HOME=/home/scraper
+ENV HOME=/home/openc
