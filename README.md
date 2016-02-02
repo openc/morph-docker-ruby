@@ -1,7 +1,7 @@
 A docker container with the ability to wrap scrapers in something useful for
 OpenCorporates.
 
-If you want to change it:
+## Making changes
 
     docker login
     <edit stuff>
@@ -17,3 +17,11 @@ there, rather than pushing them to a central repository.
 
 Since we started using this system, we set up our own docker repo and build
 slave; it's an outstanding task to migrate to that.
+
+## Updating the image
+
+1. Login to the VPN
+1. `ssh openc@morph1`
+1. `cd ~/morph-docker-ruby`
+1. `git pull --rebase`
+1. `docker build --no-cache -t opencorporates/morph-ruby .`
