@@ -27,3 +27,5 @@ slave; it's an outstanding task to migrate to that.
 1. `cd ~/morph-docker-ruby`
 1. `git pull --rebase`
 1. `docker build --no-cache -t opencorporates/morph-ruby .`
+
+The last step takes about half an hour.
