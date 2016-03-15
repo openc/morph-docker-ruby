@@ -21,8 +21,8 @@ RUN rm -rf /build
 RUN /bin/bash -l -c 'ln -s /usr/local/bin/libreoffice* /usr/local/bin/libreoffice'
 
 # PDFBox
-RUN /bin/bash -l -c 'cd /tmp && curl http://mirrors.ukfast.co.uk/sites/ftp.apache.org/pdfbox/2.0.0-RC1/pdfbox-app-2.0.0-RC1.jar > /usr/local/lib/pdfbox-app-2.0.0-RC1.jar'
-RUN /bin/bash -l -c 'ln -s /usr/local/lib/pdfbox-app-2.0.0-RC1.jar /usr/local/lib/pdfbox-app.jar'
+RUN /bin/bash -l -c 'cd /tmp && curl http://mirrors.ukfast.co.uk/sites/ftp.apache.org/pdfbox/2.0.0-RC3/pdfbox-app-2.0.0-RC3.jar > /usr/local/lib/pdfbox-app-2.0.0-RC3.jar'
+RUN /bin/bash -l -c 'ln -s /usr/local/lib/pdfbox-app-2.0.0-RC3.jar /usr/local/lib/pdfbox-app.jar'
 
 
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
