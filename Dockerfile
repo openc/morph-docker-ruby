@@ -1,6 +1,5 @@
 FROM openaustralia/morph-base
 MAINTAINER Seb Bacon <seb@opencorporates.com>
-ENV LIBRE_OFFICE_VERSION 5.1.0
 # Set the locale
 RUN locale-gen en_GB.UTF-8
 ENV LANG en_GB.UTF-8
@@ -16,7 +15,7 @@ RUN apt-get -y install --no-install-recommends gnumeric gocr libjpeg-progs unzip
 
 # Install the most recent version of libreoffice
 RUN apt-get -y install --no-install-recommends libgl1-mesa-dri libglu1-mesa
-RUN mkdir /build && cd /build && curl -L -O http://www.mirrorservice.org/sites/download.documentfoundation.org/tdf/libreoffice/stable/${LIBRE_OFFICE_VERSION}/deb/x86_64/LibreOffice_${LIBRE_OFFICE_VERSION}_Linux_x86-64_deb.tar.gz && tar xzf LibreOffice_${LIBRE_OFFICE_VERSION}_Linux_x86-64_deb.tar.gz && cd LibreOffice_${LIBRE_OFFICE_VERSION}*/DEBS && dpkg -i *.deb
+RUN LIBRE_OFFICE_VERSION=$(curl -s http://www.mirrorservice.org/sites/download.documentfoundation.org/tdf/libreoffice/stable/ | grep icons/folder | tail -1 | sed -r -e 's/.*>(.+)<\/a.*/\1/'|sed -r -e 's/\///') && mkdir /build && cd /build && curl -L -O http://www.mirrorservice.org/sites/download.documentfoundation.org/tdf/libreoffice/stable/${LIBRE_OFFICE_VERSION}/deb/x86_64/LibreOffice_${LIBRE_OFFICE_VERSION}_Linux_x86-64_deb.tar.gz && tar xzf LibreOffice_${LIBRE_OFFICE_VERSION}_Linux_x86-64_deb.tar.gz && cd LibreOffice_${LIBRE_OFFICE_VERSION}*/DEBS && dpkg -i *.deb
 RUN rm -rf /build
 RUN /bin/bash -l -c 'ln -s /usr/local/bin/libreoffice* /usr/local/bin/libreoffice'
 
