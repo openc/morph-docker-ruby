@@ -64,7 +64,7 @@ RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 
 VOLUME /output
 RUN addgroup --gid 3000 openc
-RUN adduser --home /data --disabled-login --gecos "Openc User" --uid 3000 --gid 3000 openc
+RUN adduser --home /home/openc --disabled-login --gecos "Openc User" --uid 3000 --gid 3000 openc
 
 ENV HOME=/home/openc
 USER openc
