@@ -22,10 +22,11 @@ slave; it's an outstanding task to migrate to that.
 
 ## Updating the image
 
-1. Login to the VPN
-1. `ssh openc@morph1`
-1. `cd ~/morph-docker-ruby`
-1. `git pull --rebase`
-1. `docker build --no-cache -t opencorporates/morph-ruby .`
+Login to the VPN, then:
+
+    ssh openc@morph1
+    cd ~/morph-docker-ruby
+    git pull --rebase
+    docker build --no-cache -t opencorporates/morph-ruby .
 
 The last step takes 30-90 minutes.
