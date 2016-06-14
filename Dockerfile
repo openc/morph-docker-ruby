@@ -11,7 +11,7 @@ RUN apt-get update
 RUN apt-get -y install curl libsm6 libxslt-dev libxml2-dev libcurl4-gnutls-dev poppler-utils
 
 # This installs various executables that are useful for scraping
-RUN apt-get -y install --no-install-recommends gnumeric gocr libjpeg-progs unzip
+RUN apt-get -y install --no-install-recommends gnumeric gocr libjpeg-progs p7zip-full unzip
 
 # Install the most recent version of libreoffice
 RUN apt-get -y install --no-install-recommends libgl1-mesa-dri libglu1-mesa
