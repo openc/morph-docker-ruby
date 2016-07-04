@@ -3,24 +3,20 @@
 A docker container with the ability to wrap scrapers in something useful for
 OpenCorporates.
 
-## Making changes
+## Development
 
-    docker login
-    <edit stuff>
+Make your local changes and then
+
     docker build --no-cache -t opencorporates/morph-ruby .
-    docker push opencorporates/morph-ruby
-
-If you want to play with the image interactively:
-
     docker run -i -t opencorporates/morph-ruby /bin/bash
+
+## Releasing
 
 Currently, as the images are only used on morph1, we tend only to build them
 there, rather than pushing them to a central repository.
 
 Since we started using this system, we set up our own docker repo and build
 slave; it's an outstanding task to migrate to that.
-
-## Updating the image
 
 Login to the VPN, then:
 
@@ -30,3 +26,8 @@ Login to the VPN, then:
     docker build --no-cache -t opencorporates/morph-ruby .
 
 The last step takes 30-90 minutes.
+
+`morph-docker-python` depends on this docker image, so you should also build that. Assuming you are still on `morph1`:
+
+    cd ~/morph-docker-python
+    docker build --no-cache -t opencorporates/morph-python .
