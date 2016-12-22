@@ -25,7 +25,4 @@ Login to the VPN, then:
     git pull --rebase
     docker build --no-cache -t opencorporates/morph-ruby .
 
-`morph-docker-python` depends on this docker image, so you should also build that. Assuming you are still on `morph1`:
-
-    cd ~/morph-docker-python
-    docker build --no-cache -t opencorporates/morph-python .
+`morph-docker-python` depends on this docker image, so you should also build that. See the README in that repo.
