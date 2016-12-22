@@ -25,8 +25,6 @@ Login to the VPN, then:
     git pull --rebase
     docker build --no-cache -t opencorporates/morph-ruby .
 
-The last step takes 30-90 minutes.
-
 `morph-docker-python` depends on this docker image, so you should also build that. Assuming you are still on `morph1`:
 
     cd ~/morph-docker-python
