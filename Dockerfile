@@ -1,4 +1,4 @@
-FROM openaustralia/morph-base
+FROM docker-registry.opencorporates.com/openaustralia/morph-base
 MAINTAINER OpenCorporates <tech@opencorporates.com>
 # Set the locale
 RUN locale-gen en_GB.UTF-8
