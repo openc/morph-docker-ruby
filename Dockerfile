@@ -55,6 +55,11 @@ RUN apt-get update
 RUN apt-get -y install openjdk-7-jre-headless
 RUN /bin/bash -l -c 'cd /tmp && curl http://mirror.ox.ac.uk/sites/rsync.apache.org/tika/tika-app-1.7.jar > /usr/local/tika-app-1.7.jar'
 
+# Install phantomjs from our local package repository
+RUN wget http://packages.opencorporates.internal/pool/main/p/phantomjs/phantomjs-2.1.1+openc.deb && \
+  dpkg -i phantomjs-2.1.1+openc.deb && \
+  rm phantomjs-2.1.1+openc.deb
+
 ADD Gemfile /etc/Gemfile
 RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 # For some reason bundle install doesn't install everything, so we need to do it twice
