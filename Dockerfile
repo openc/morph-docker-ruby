@@ -8,7 +8,7 @@ ENV LC_ALL en_GB.UTF-8
 
 # libcurl is needed by typhoeus gem
 RUN apt-get update
-RUN apt-get -y install curl libsm6 libxslt-dev libxml2-dev libcurl4-gnutls-dev poppler-utils
+RUN apt-get -y install curl libsm6 libxslt-dev libxml2-dev libcurl4-gnutls-dev poppler-utils build-essential
 
 # This installs various executables that are useful for scraping
 RUN apt-get -y install --no-install-recommends gnumeric gocr libjpeg-progs p7zip-full unzip
