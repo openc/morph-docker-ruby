@@ -55,7 +55,7 @@ RUN apt-get update
 RUN apt-get -y install openjdk-7-jre-headless
 RUN /bin/bash -l -c 'cd /tmp && curl http://mirror.ox.ac.uk/sites/rsync.apache.org/tika/tika-app-1.7.jar > /usr/local/tika-app-1.7.jar'
 
-ADD Gemfile /etc/Gemfile
+ADD Gemfile* /etc/
 RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
 
 VOLUME /output
