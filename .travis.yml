@@ -1,0 +1,7 @@
+services:
+  - docker
+
+install: true
+
+script:
+  - docker build -t opencorporates/morph-ruby .
