@@ -8,7 +8,7 @@ ENV LC_ALL en_GB.UTF-8
 
 # libcurl is needed by typhoeus gem
 RUN apt-get update
-RUN apt-get -y install curl libsm6 libxslt-dev libxml2-dev libcurl4-gnutls-dev poppler-utils
+RUN apt-get -y install curl libsm6 libxslt-dev libxml2-dev libcurl4-gnutls-dev poppler-utils build-essential
 
 # This installs various executables that are useful for scraping
 RUN apt-get -y install --no-install-recommends gnumeric gocr libjpeg-progs p7zip-full unzip
@@ -55,12 +55,8 @@ RUN apt-get update
 RUN apt-get -y install openjdk-7-jre-headless
 RUN /bin/bash -l -c 'cd /tmp && curl http://mirror.ox.ac.uk/sites/rsync.apache.org/tika/tika-app-1.7.jar > /usr/local/tika-app-1.7.jar'
 
-ADD Gemfile /etc/Gemfile
+ADD Gemfile* /etc/
 RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
-# For some reason bundle install doesn't install everything, so we need to do it twice
-RUN /bin/bash -l -c 'rm /etc/Gemfile.lock'
-RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
-
 
 VOLUME /output
 RUN addgroup --gid 3000 openc
