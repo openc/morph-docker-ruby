@@ -201,7 +201,7 @@ GEM
       upsert (= 2.0.3)
       uuidtools (= 2.1.4)
       webrobots (= 0.1.1)
-    turbot-runner (0.2.27)
+    turbot-runner (0.2.28)
       activesupport (~> 4.1.4)
       openc-json_schema
     turbotlib (0.0.14)
@@ -226,4 +226,4 @@ DEPENDENCIES
   turbot-runner (>= 0.2.7)
 
 BUNDLED WITH
-   1.13.7
+   1.15.1
