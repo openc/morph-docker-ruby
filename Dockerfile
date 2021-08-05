@@ -26,6 +26,18 @@ RUN /bin/bash -l -c 'ln -s /usr/local/bin/libreoffice* /usr/local/bin/libreoffic
 RUN /bin/bash -l -c 'cd /tmp && curl http://mirrors.ukfast.co.uk/sites/ftp.apache.org/pdfbox/2.0.0-RC3/pdfbox-app-2.0.0-RC3.jar > /usr/local/lib/pdfbox-app-2.0.0-RC3.jar'
 RUN /bin/bash -l -c 'ln -s /usr/local/lib/pdfbox-app-2.0.0-RC3.jar /usr/local/lib/pdfbox-app.jar'
 
+# Install later openssl from source, add it to the load path
+RUN ( \
+      cd /var/tmp && \
+      curl -O -L https://www.openssl.org/source/old/1.0.2/openssl-1.0.2u.tar.gz && \
+      tar -xvf openssl-1.0.2u.tar.gz && \
+      cd openssl-1.0.2u && \
+      ./config --prefix=/opt/openssl shared && \
+      make --silent && \
+      make --silent install \
+    )
+ENV LD_LIBRARY_PATH=/opt/openssl/lib
+
 RUN curl -sSL http://rvm.io/mpapis.asc | gpg2 --import -
 RUN gpg --keyserver hkp://pgp.mit.edu --recv-keys D39DC0E3
 RUN curl -sSL http://get.rvm.io | bash -s stable
