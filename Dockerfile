@@ -38,20 +38,26 @@ RUN ( \
     )
 ENV LD_LIBRARY_PATH=/opt/openssl/lib
 
-RUN curl -sSL http://rvm.io/mpapis.asc | gpg2 --import -
-RUN gpg --keyserver hkp://pgp.mit.edu --recv-keys D39DC0E3
-RUN curl -sSL http://get.rvm.io | bash -s stable
-RUN echo 'source /usr/local/rvm/scripts/rvm' >> /etc/bash.bashrc
-
-RUN /bin/bash -l -c 'rvm install ruby-1.9.3-p545'
-RUN /bin/bash -l -c 'gem install bundler'
-
+RUN ( \
+      cd /var/tmp && \
+      git clone https://github.com/rbenv/ruby-build.git && \
+      cd ruby-build && \
+      git checkout v20210804 && \
+      PREFIX=/opt/ruby-build ./install.sh && \
+      cflags='-I/opt/openssl/include' LDFLAGS='-Wl,-rpath,/opt/openssl/lib -L/opt/openssl/lib' \
+        /opt/ruby-build/bin/ruby-build 1.9.3-p545 /opt/ruby && \
+      echo 'PATH="\${PATH}:/opt/ruby/bin" >> /etc/bash.bashrc' \
+    )
+ENV PATH=${PATH}:/opt/ruby/bin
+RUN cflags='-I/opt/openssl/include' LDFLAGS='-Wl,-rpath,/opt/openssl-1.0/lib -L/opt/openssl/lib' \
+      gem install -v 1.17.3 --no-ri --no-rdoc bundler
 
 # Volume for sharing wrapper script
 VOLUME /utils
 
 # Special handling for scraperwiki gem because rubygems doesn't support
 # gems from git repositories. So we have to explicitly install it.
+RUN apt-get install -y libsqlite3-dev
 RUN mkdir /build
 RUN git clone https://github.com/openaustralia/scraperwiki-ruby.git /build
 RUN cd /build; git checkout morph_defaults
@@ -70,12 +76,16 @@ RUN apt-get update
 RUN apt-get -y install openjdk-7-jre-headless
 RUN /bin/bash -l -c 'cd /tmp && curl http://mirror.ox.ac.uk/sites/rsync.apache.org/tika/tika-app-1.7.jar > /usr/local/tika-app-1.7.jar'
 
+RUN echo 'LD_LIBRARY_PATH=/opt/openssl/lib >> /etc/bash.bashrc'
+
 ADD Gemfile* /etc/
-RUN /bin/bash -l -c 'bundle install --gemfile /etc/Gemfile'
+RUN /bin/bash -l -c 'sed -i -e "s/https:/http:/" /etc/Gemfile && bundle install --gemfile /etc/Gemfile'
 
 VOLUME /output
-RUN addgroup --gid 3000 openc
-RUN adduser --home /home/openc --disabled-login --gecos "Openc User" --uid 3000 --gid 3000 openc
+
+RUN addgroup --gid 3000 openc && \
+    adduser --home /home/openc --disabled-login --gecos "Openc User" --uid 3000 --gid 3000 openc && \
+    chown -R openc:openc /opt/ruby
 
 ENV HOME=/home/openc
 USER openc
