@@ -6,6 +6,9 @@ ENV LANG en_GB.UTF-8
 ENV LANGUAGE en_GB:en
 ENV LC_ALL en_GB.UTF-8
 
+# replace the original links with their old-releases equivalents
+RUN sed -i.bak -r 's/(archive|security).ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+
 # libcurl is needed by typhoeus gem
 RUN apt-get update
 RUN apt-get -y install curl libsm6 libxslt-dev libxml2-dev libcurl4-gnutls-dev poppler-utils build-essential
