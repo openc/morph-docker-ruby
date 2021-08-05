@@ -11,7 +11,7 @@ RUN sed -i.bak -r 's/(archive|security).ubuntu.com/old-releases.ubuntu.com/g' /e
 
 # libcurl is needed by typhoeus gem
 RUN apt-get update
-RUN apt-get -y install curl libsm6 libxslt-dev libxml2-dev libcurl4-gnutls-dev poppler-utils build-essential
+RUN apt-get -y install curl libsm6 libxslt-dev libxml2-dev libcurl4-gnutls-dev poppler-utils build-essential gnupg2
 
 # This installs various executables that are useful for scraping
 RUN apt-get -y install --no-install-recommends gnumeric gocr libjpeg-progs p7zip-full unzip
@@ -26,9 +26,9 @@ RUN /bin/bash -l -c 'ln -s /usr/local/bin/libreoffice* /usr/local/bin/libreoffic
 RUN /bin/bash -l -c 'cd /tmp && curl http://mirrors.ukfast.co.uk/sites/ftp.apache.org/pdfbox/2.0.0-RC3/pdfbox-app-2.0.0-RC3.jar > /usr/local/lib/pdfbox-app-2.0.0-RC3.jar'
 RUN /bin/bash -l -c 'ln -s /usr/local/lib/pdfbox-app-2.0.0-RC3.jar /usr/local/lib/pdfbox-app.jar'
 
-
-RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
-RUN curl -sSL https://get.rvm.io | bash -s stable
+RUN curl -sSL http://rvm.io/mpapis.asc | gpg2 --import -
+RUN gpg --keyserver hkp://pgp.mit.edu --recv-keys D39DC0E3
+RUN curl -sSL http://get.rvm.io | bash -s stable
 RUN echo 'source /usr/local/rvm/scripts/rvm' >> /etc/bash.bashrc
 
 RUN /bin/bash -l -c 'rvm install ruby-1.9.3-p545'
