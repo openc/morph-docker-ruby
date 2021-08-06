@@ -12,7 +12,8 @@ RUN sed -i.bak -r 's/(archive|security).ubuntu.com/old-releases.ubuntu.com/g' /e
 VOLUME /utils
 
 ADD Gemfile* /etc/
-RUN /bin/bash -l -c 'sed -i -e "s/https:/http:/" /etc/Gemfile && bundle install --gemfile /etc/Gemfile'
+RUN /bin/bash -l -c 'gem install --force -v 1.17.3 bundler' && \
+    /bin/bash -l -c 'sed -i -e "s/https:/http:/" /etc/Gemfile && bundle install --gemfile /etc/Gemfile'
 
 VOLUME /output
 
