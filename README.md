@@ -16,6 +16,7 @@ Login to the VPN, then:
 
     ssh openc@morph1
     cd ~/morph-docker-ruby
+    git checkout master
     git pull --rebase
     docker build --no-cache -t docker-registry.opencorporates.com/opencorporates/morph-ruby .
     docker push docker-registry.opencorporates.com/opencorporates/morph-ruby
